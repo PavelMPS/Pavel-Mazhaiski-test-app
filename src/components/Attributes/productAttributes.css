@@ -1,0 +1,50 @@
+.product-colors {
+  display: flex;
+  margin-bottom: 36px;
+}
+
+.color-example {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.product-attribute-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 8px;
+}
+
+.produst-boxes {
+  display: flex;
+}
+
+.size-box {
+  width: 63px;
+  height: 45px;
+  margin-right: 12px;
+  border: 1px solid #1d1f22;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  color: #1d1f22;
+  margin-bottom: 24px;
+  cursor: pointer;
+  user-select: none;
+}
