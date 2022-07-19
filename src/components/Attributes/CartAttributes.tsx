@@ -10,7 +10,7 @@ class AttributesBlock extends React.Component<AttributeBlockProps, {}> {
     return (
       <>
         {attribute.items.map(
-          (attr: AttributeItem, index: number): JSX.Element | undefined => {
+          (attr: AttributeItem, index: number): JSX.Element | AttributeItem => {
             if (attribute.id === attributeType.size) {
               return (
                 <div
@@ -102,7 +102,7 @@ class AttributesBlock extends React.Component<AttributeBlockProps, {}> {
                   {attr.value}
                 </div>
               );
-            }
+            } else return attr;
           }
         )}
       </>

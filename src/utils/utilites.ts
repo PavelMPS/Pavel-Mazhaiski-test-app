@@ -21,8 +21,9 @@ export function cutTegs(str: string): string {
 
 export function getProductQuantity(cart: Array<CartProduct>): number {
   let count: number = 0;
-  cart.map((item: CartProduct): void => {
+  cart.map((item: CartProduct): CartProduct => {
     count = item.quantity + count;
+    return item;
   });
   return count;
 }

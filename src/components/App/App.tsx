@@ -112,11 +112,13 @@ class App extends React.Component<{}, any> {
       quantity: 1,
     };
 
-    product.attributes.map((item: AttributeType): void => {
+    product.attributes.map((item: AttributeType): AttributeType => {
       if (this.state[item.id]) {
         newCartObject[item.id] = this.state[item.id].value;
+        return item;
       } else {
         newCartObject[item.id] = "0";
+        return item;
       }
     });
 
