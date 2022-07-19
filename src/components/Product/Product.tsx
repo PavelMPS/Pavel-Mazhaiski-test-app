@@ -45,6 +45,7 @@ class Product extends React.Component<ProductProps, ProductState> {
 
   render(): JSX.Element {
     const { choosenProduct, currency, changeChoosenAttributes } = this.props;
+    const isStock: string = this.props.choosenProduct.inStock;
 
     return (
       <div className="product-container">
@@ -98,7 +99,11 @@ class Product extends React.Component<ProductProps, ProductState> {
               <p>{getAmount(choosenProduct.prices, currency)}</p>
             </div>
           </div>
-          <button className="add-to-cart-btn" onClick={this.addToCartHandler}>
+          <button 
+            onClick={this.addToCartHandler} 
+            disabled={!isStock} 
+            className={!isStock ? "add-to-cart-btn disabled" : "add-to-cart-btn"}
+          >
             {productSettings.addToCart}
           </button>
           <div className="product-description">

@@ -107,6 +107,15 @@
   transform: translateY(2px);
 }
 
+.disabled {
+  cursor: auto;
+  background: rgb(169, 169, 169);
+}
+
+.disabled:hover {
+  transform: none;
+}
+
 .product-description {
   width: 292px;
   height: 103px;

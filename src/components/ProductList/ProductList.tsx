@@ -89,7 +89,7 @@ class ProductList extends React.Component<any, any> {
                         style={
                           product.inStock
                             ? {}
-                            : { pointerEvents: "none", opacity: "0.5" }
+                            : { opacity: "0.5" }
                         }
                       >
                         {product.attributes.length ? (
