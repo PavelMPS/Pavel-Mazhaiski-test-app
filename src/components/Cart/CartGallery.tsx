@@ -10,7 +10,7 @@ class CartGallery extends React.Component<GalleryProps, GalleryState> {
     super(props);
 
     this.state = { choosingImage: this.props.gallery[0], counter: 0 };
-    
+
     this.gallerySwitcherHandler = this.gallerySwitcherHandler.bind(this);
   }
 
@@ -52,12 +52,18 @@ class CartGallery extends React.Component<GalleryProps, GalleryState> {
           className="cart-gallery-maintance"
           onClick={this.gallerySwitcherHandler}
         >
-          <div className="cart-left-arrow">
-            <div className="left" id="left">{`<`}</div>
-          </div>
-          <div className="cart-right-arrow">
-            <div className="right" id="right">{`>`}</div>
-          </div>
+          {this.props.gallery.length > 1 ? (
+            <>
+              <div className="cart-left-arrow">
+                <div className="left" id="left">{`<`}</div>
+              </div>
+              <div className="cart-right-arrow">
+                <div className="right" id="right">{`>`}</div>
+              </div>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );
