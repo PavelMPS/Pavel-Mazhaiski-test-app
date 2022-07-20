@@ -53,11 +53,13 @@ header {
   background: url("../../assets/logo.png");
 }
 
-.header-utils {
-  display: flex;
-}
-
 .currency {
+  opacity: 0;
+  width: 40px;
+  position: relative;
+  position: relative;
+  top: -15px;
+  right: -22px;
   border: none;
   font-size: 18px;
   margin-right: 20px;
@@ -67,9 +69,29 @@ header {
   cursor: pointer;
 }
 
+.select-arrow {
+  position: relative;
+  top: -5px;
+  right: -45px;
+  width: 8px;
+  height: 3px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: url("../../assets/arrow-down.png");
+}
+
+.label-currency {
+  position: relative;
+  top: 5px;
+  right: -28px;
+}
+
 .cart {
   width: 20px;
   height: 20px;
+  position: relative;
+  top: -40px;
+  left: 70px;
   background: url("../../assets/empty-cart.png");
   background-repeat: no-repeat;
   background-size: cover;

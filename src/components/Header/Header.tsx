@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import withHocs from "./HeaderHOC";
 import { Categorie, Currency } from "../../types";
 import MiniCart from "../MiniCart/MiniCart";
-import { getProductQuantity } from "../../utils/utilites";
+import { getHeaderLabel, getProductQuantity } from "../../utils/utilites";
 
 import "./header.css";
 
-class Header extends React.Component<any, {}> {
+class Header extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
@@ -73,15 +73,24 @@ class Header extends React.Component<any, {}> {
             <div className="header-logo"></div>
             <div className="header-utils">
               <div>
-                <select
-                  className="currency"
-                  name="currency"
-                  id="currency"
-                  onChange={this.selectCurrencyHandler}
-                >
-                  {headerProps.data.loading
-                    ? ""
-                    : headerProps.data.currencies.map(
+                {headerProps.data.loading ? (
+                  ""
+                ) : (
+                  <>
+                    <div className="label-currency">
+                      {getHeaderLabel(
+                        headerProps.data.currencies,
+                        this.props.currency
+                      )}
+                    </div>
+                    <div className="select-arrow"></div>
+                    <select
+                      className="currency"
+                      name="currency"
+                      id="currency"
+                      onChange={this.selectCurrencyHandler}
+                    >
+                      {headerProps.data.currencies.map(
                         (item: Currency): JSX.Element => {
                           return (
                             <option key={item.label} value={item.label}>
@@ -90,7 +99,9 @@ class Header extends React.Component<any, {}> {
                           );
                         }
                       )}
-                </select>
+                    </select>
+                  </>
+                )}
               </div>
               <div className="cart" onClick={this.showMiniCart}>
                 {headerProps.myCart.length ? (

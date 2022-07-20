@@ -7,6 +7,13 @@ export function getLabel(prices: Array<Price>, currentLabel: string): string {
   })[0].currency.symbol;
 }
 
+export function getHeaderLabel(currencies: any, currentLabel: string): any {
+  return currencies.filter((item: any) => {
+    return item.label === currentLabel;
+  })[0].symbol
+   
+}
+
 export function getAmount(prices: Array<Price>, currentLabel: string): number {
   return prices.filter((el: Price): boolean => {
     return el.currency.label === currentLabel;
