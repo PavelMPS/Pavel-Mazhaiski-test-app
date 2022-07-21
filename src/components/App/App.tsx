@@ -1,8 +1,9 @@
 import React from "react";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
+// import ApolloClient from "apollo-boost";
+// import { ApolloProvider } from "react-apollo";
 import { Route, Routes } from "react-router-dom";
 
+import withHocs from "./AppHOC"
 import {
   AttributeType,
   CartProduct,
@@ -15,13 +16,14 @@ import NotFound from "../NotFound/NotFound";
 import ProductList from "../ProductList/ProductList";
 import { checkTheSameProduct } from "../../utils/utilites";
 import { add, remove } from "../../constants/constant";
+import Welcome from "../Welcome/Welcome";
 
-const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-});
+// const client = new ApolloClient({
+//   uri: "http://localhost:4000/graphql",
+// });
 
-class App extends React.Component<{}, any> {
-  constructor(props: {}) {
+class App extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
 
     this.addToCart = this.addToCart.bind(this);
@@ -37,7 +39,7 @@ class App extends React.Component<{}, any> {
       changeCurrency: this.changeCurrency,
       addToCart: this.addToCart,
       myCart: [],
-      filter: "all",
+      filter: localStorage.getItem('category') ? localStorage.getItem('category') : "all",
       changeCategory: this.changeCategory,
       isProductOpen: false,
       isMiniCartOpen: false,
@@ -156,18 +158,22 @@ class App extends React.Component<{}, any> {
 
   changeCategory(newFilter: string): void {
     this.setState({ ...this.state, filter: newFilter, isProductOpen: false });
+    localStorage.setItem('category', newFilter);
   }
 
   render(): JSX.Element {
-
+    console.log(this.props)
     return (
-      <ApolloProvider client={client}>
+      // <ApolloProvider client={client}>
+        <>
         <Header {...this.state} />
         <main>
           <Routes>
-            <Route path="/" element={<ProductList {...this.state} />} />
-            <Route path="/clothes" element={<ProductList {...this.state} />} />
-            <Route path="/tech" element={<ProductList {...this.state} />} />
+            {this.props.data.loading ? '' : this.props.data.categories.map((item: any) => {
+              return (
+                <Route path={`/${item.name}`} element={<ProductList {...this.state} />}/>
+              )
+            })}
             <Route
               path="/cart"
               element={
@@ -180,12 +186,14 @@ class App extends React.Component<{}, any> {
                 />
               }
             />
+            <Route path="/" element={<Welcome />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </main>
-      </ApolloProvider>
+        </>
+      // </ApolloProvider>
     );
   }
 }
 
-export default App;
+export default withHocs(App);

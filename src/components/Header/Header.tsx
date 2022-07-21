@@ -46,7 +46,7 @@ class Header extends React.Component<any, any> {
                       (categorie: Categorie): JSX.Element => {
                         return (
                           <Link
-                            to={"/"}
+                            to={`/${categorie.name}`}
                             className="navigation-link"
                             id={categorie.name}
                             key={categorie.name}
