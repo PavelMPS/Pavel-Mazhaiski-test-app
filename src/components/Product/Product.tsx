@@ -25,11 +25,6 @@ class Product extends React.Component<ProductProps, ProductState> {
   componentDidMount(): void {
     const gallery: Array<string> = this.props.choosenProduct.gallery;
     this.setState({ currentPicture: gallery[0] });
-
-    // const attribute = { value: '0' };
-    // this.props.choosenProduct.attributes.map((item: any, index: number) => {
-    //   this.props.changeChoosenAttributes(attribute, item.name)
-    // })
   }
 
   addToCartHandler(e: React.SyntheticEvent): void {
@@ -107,7 +102,7 @@ class Product extends React.Component<ProductProps, ProductState> {
             {productSettings.addToCart}
           </button>
           <div className="product-description">
-            {cutTegs(choosenProduct.description)}
+            {`${choosenProduct.description}`}
           </div>
         </div>
       </div>

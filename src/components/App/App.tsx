@@ -1,9 +1,7 @@
 import React from "react";
-// import ApolloClient from "apollo-boost";
-// import { ApolloProvider } from "react-apollo";
 import { Route, Routes } from "react-router-dom";
 
-import withHocs from "./AppHOC"
+import withHocs from "./AppHOC";
 import {
   AttributeType,
   CartProduct,
@@ -12,15 +10,10 @@ import {
 } from "../../types";
 import Cart from "../Cart/Cart";
 import Header from "../Header/Header";
-import NotFound from "../NotFound/NotFound";
 import ProductList from "../ProductList/ProductList";
 import { checkTheSameProduct } from "../../utils/utilites";
 import { add, remove } from "../../constants/constant";
 import Welcome from "../Welcome/Welcome";
-
-// const client = new ApolloClient({
-//   uri: "http://localhost:4000/graphql",
-// });
 
 class App extends React.Component<any, any> {
   constructor(props: any) {
@@ -33,15 +26,18 @@ class App extends React.Component<any, any> {
     this.toggleProductWindow = this.toggleProductWindow.bind(this);
     this.changeProductQuantity = this.changeProductQuantity.bind(this);
     this.changeChoosenAttributes = this.changeChoosenAttributes.bind(this);
-   
+
     this.state = {
       currency: "USD",
       changeCurrency: this.changeCurrency,
       addToCart: this.addToCart,
       myCart: [],
-      filter: localStorage.getItem('category') ? localStorage.getItem('category') : "all",
+      filter: localStorage.getItem("category")
+        ? localStorage.getItem("category")
+        : "all",
       changeCategory: this.changeCategory,
-      isProductOpen: false,
+      isProductOpen:
+        localStorage.getItem("productOpen") === "true" ? true : false,
       isMiniCartOpen: false,
       showMiniCartHandler: this.showMiniCartHandler,
       changeProductQuantity: this.changeProductQuantity,
@@ -62,7 +58,7 @@ class App extends React.Component<any, any> {
   }
 
   changeChoosenAttributes(attribute: string, type: string): void {
-    this.setState((state: MainState) => ({...state, [type]: attribute }));
+    this.setState((state: MainState) => ({ ...state, [type]: attribute }));
   }
 
   toggleProductWindow(toggler: boolean): void {
@@ -158,22 +154,27 @@ class App extends React.Component<any, any> {
 
   changeCategory(newFilter: string): void {
     this.setState({ ...this.state, filter: newFilter, isProductOpen: false });
-    localStorage.setItem('category', newFilter);
+    localStorage.setItem("category", newFilter);
   }
 
   render(): JSX.Element {
-    console.log(this.props)
+
     return (
-      // <ApolloProvider client={client}>
-        <>
+      <>
         <Header {...this.state} />
         <main>
           <Routes>
-            {this.props.data.loading ? '' : this.props.data.categories.map((item: any) => {
-              return (
-                <Route path={`/${item.name}`} element={<ProductList {...this.state} />}/>
-              )
-            })}
+            {this.props.data.loading
+              ? ""
+              : this.props.data.categories.map((item: any) => {
+                  return (
+                    <Route
+                      path={`/${item.name}`}
+                      key={item.name}
+                      element={<ProductList {...this.state} />}
+                    />
+                  );
+                })}
             <Route
               path="/cart"
               element={
@@ -187,11 +188,9 @@ class App extends React.Component<any, any> {
               }
             />
             <Route path="/" element={<Welcome />} />
-            <Route path="/*" element={<NotFound />} />
           </Routes>
         </main>
-        </>
-      // </ApolloProvider>
+      </>
     );
   }
 }

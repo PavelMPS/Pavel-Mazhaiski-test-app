@@ -12,24 +12,31 @@ class ProductList extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
-    this.state = { choosingProduct: [] };
+    this.state = { choosingProduct: localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')!) : [] };
 
     this.handleToggle = this.handleToggle.bind(this);
     this.addToCartHandler = this.addToCartHandler.bind(this);
+  }
+
+  componentWillUnmount(): void {
+    localStorage.setItem('productOpen', 'false');
+    localStorage.setItem('product', '');
   }
 
   handleToggle(e: React.SyntheticEvent): void {
     const { toggleProductWindow, data } = this.props;
     
     toggleProductWindow(true);
+    localStorage.setItem('productOpen', 'true');
+    
     const choosingProduct = data.category.products.filter(
       (product: ProductContain): boolean => {
         const target = e.target as HTMLInputElement;
         return product.id === target.id;
       }
     );
-    
-    this.setState({ ...this.state, choosingProd: choosingProduct });
+    localStorage.setItem('product', JSON.stringify(choosingProduct));
+    this.setState({ ...this.state, choosingProduct: choosingProduct });
     
   }
 
@@ -59,7 +66,7 @@ class ProductList extends React.Component<any, any> {
       <div className="products-list-container">
         {isProductOpen ? (
           <Product
-            choosenProduct={this.state.choosingProd[0]}
+            choosenProduct={this.state.choosingProduct[0]}
             currency={currency}
             addToCart={addToCart}
             changeChoosenAttributes={changeChoosenAttributes}

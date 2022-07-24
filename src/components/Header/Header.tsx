@@ -18,6 +18,8 @@ class Header extends React.Component<any, any> {
   }
 
   changeCategoryHadler(e: React.SyntheticEvent): void {
+    localStorage.setItem('productOpen', 'false');
+    localStorage.setItem('product', '');
     const target = e.target as HTMLInputElement;
     if (target.id) this.props.changeCategory(target.id);
   }
