@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cutTegs, getAmount, getLabel } from "../../utils/utilites";
+import { getAmount, getLabel } from "../../utils/utilites";
 import {
   AttributeType,
   ProductContain,
