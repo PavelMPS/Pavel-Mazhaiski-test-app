@@ -1,0 +1,34 @@
+.cart-image-container {
+  width: 290px;
+  height: 275px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.cart-gallery-maintance {
+  display: flex;
+  width: 56px;
+  justify-content: space-between;
+  position: relative;
+  top: 220px;
+  left: 200px;
+}
+
+.cart-left-arrow,
+.cart-right-arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.73);
+}
+
+.left,
+.right {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  user-select: none;
+}
